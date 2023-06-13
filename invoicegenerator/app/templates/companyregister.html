@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} Register Company {% endblock %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+{% endblock%}
+
+{% block 'body' %}
+<div class="container mt-5">
+    <div class="container">
+        <form class="row g-3 needs-validation p-4" action="{% url 'company_save' %}" method="POST">
+            {% csrf_token %}
+
+            <h4>Dados da Companhia</h4>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Numero de Registro da Companhia: </label> (Obrigatorio)
+                <input type="text" class="form-control" name="cnpj" id="cnpj" required> 
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Nome Companhia: </label> (Obrigatorio)
+                <input type="text" class="form-control" name="nome"  required> 
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Telefone: </label>
+                <input type="tel" class="form-control" name="telefone"  >
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Email: </label>
+                <input type="email" class="form-control" name="email"  >
+            </div>
+            
+            <div></div>
+            
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">CEP: </label>
+                <input type="text" placeholder="se houver.." class="form-control" name="cep" id="cep" >
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Rua: </label>
+                <input type="text" class="form-control" id="rua" name="logradouro">
+            </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Numero: </label>
+                <input type="text" class="form-control" name="numero">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Complemento: </label>
+                <input type="text" class="form-control" name="complemento">
+            </div>
+
+            <div></div>
+
+            <div class="col-md-2">
+                <label for="validationCustom03" class="form-label">
+                    Bairro: </label>
+                <input type="text" class="form-control" id="bairro" name="bairro">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom03" class="form-label">Cidade: </label>
+                <input type="text" class="form-control" id="cidade" name="cidade">
+
+            </div>
+            <div class="col-md-2">
+                <label for="validationCustom04" class="form-label">Estado: </label>
+                <input type="text" class="form-control" id="uf" name="estado">
+            </div>
+            <div class="col-md-2">
+                <label for="validationCustom04" class="form-label">País: </label>
+                <input type="text" class="form-control" id="uf" name="pais">
+            </div>
+
+            <div>
+                <button class="btn btn-info" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

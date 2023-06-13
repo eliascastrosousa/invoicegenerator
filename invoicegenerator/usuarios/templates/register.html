@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} Register {% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}
+
+<div class="container mt-5">
+
+  <h1>Cadastro</h1>
+
+  <form action="{% url 'register' %}" method="POST">{% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input type="text" class="form-control" name="nome">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Sobrenome</label>
+      <input type="text" class="form-control" name="sobrenome">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input type="text" class="form-control" name="username">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" name="email">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input type="password" class="form-control" name="password">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Repita a senha</label>
+      <input type="password" class="form-control" name="password2">
+    </div>    
+    <br>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    
+    <button type="submit" class="btn btn-light">Register</button>
+    <a href="{% url 'login' %}"> <input type="button" value="Voltar" class="btn btn-unline-warning m-1"> </a>
+  </form>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} My Address {% endblock %}
+
+{% block 'head' %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}    
+    <div class="container mt-5">
+        <h2>Meus Dados</h2> 
+        <hr>
+        <br>
+        {% for item in address %}
+            <p>Rua: {{ item.logradouro}} Numero {{ item.numero}}, Complemento: {{ item.complemento}}</p>
+            <p>Bairro: {{ item.bairro}}, {{ item.cidade}}-{{ item.estado}}</p>
+            <a href="{% url 'addressregister' %}"> <input type="button" value="Editar Dados" class="btn btn-secondary m-1"> </a>
+
+
+            {% empty %}
+            <p>Nenhum endereço Cadastrado. </p>
+            <a href="{% url 'addressregister' %}"> <input type="button" value="Cadastrar Dados" class="btn btn-secondary m-1"> </a>
+        {% endfor %}
+    </div>
+    {% endblock %}
