@@ -7,8 +7,77 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
 
 {% block 'body' %}
-<div class="container mt-5">
-        forms pré preenchido com todos os dados 
-        botão de gerar nota que leva para imprimir
+
+<div class="container mt-5" id="imprimir">
+        <div class="container mt-5">
+                {% for item in dadoscomplementares %}
+
+                <div class="row">
+                        <div class="col">
+                                <h4>{{ request.user.first_name }} {{ request.user.last_name}}</h4>
+                                <p>
+                                        {{ item.cnpj}} <br>
+                                        Rua: {{ item.logradouro}}, N. {{ item.numero}}, {{ item.bairro}},
+                                        {{item.cidade}}-{{ item.estado}} <br>
+                                        {{ request.user.email}}
+                                </p>
+                                <br>
+
+                                <h4>INVOICE TO</h4>
+
+                                <p>
+                                        {{ company.nome}} <br>
+                                        {{ company.logradouro}}, {{ company.bairro}} - {{ company.cidade}} <br>
+                                        VAT Number: {{ company.cnpj}}
+                                </p>
+                        </div>
+                        <div class="col">
+                                <h4>INVOICE </h4>
+                                <P>{{nota_fiscal}}</P>
+                        </div>
+                </div>
+        </div>
+        <hr>
+        <div class="row">
+                <div class="col">
+                        <p>ISSUE DATE</p>
+                        {{data_emissao}}
+                </div>
+                <div class="col">
+                        <p>DUE DATE</p>
+                        {{data_vencimento}}
+
+                </div>
+                <div class="col">
+                        <P>SWIFT CODE</P>
+                        {{ item.swiftcode}}
+                </div>
+                <div class="col">
+                        <P>IBAN CODE</P>
+                        {{ item.ibancode}}
+                </div>
+        </div>
+        {% empty %}
+                <p>Nenhum endereço Cadastrado. </p>
+                
+                <a href="{% url 'addressregister' %}"> <input type="button" value="Cadastrar Dados"
+                                class="btn btn-secondary m-1"> </a>
+        {% endfor %}
 </div>
+<div class="container mt-5">
+        <input type="button" class="btn btn-primary" value="Imprimir PDF"  onclick="imprimir()">
+        <a href="{% url 'companylist' %}"><input type="button" class="btn btn-secondary" value="Voltar"></a>
+</div>
+</div>
+
+<script>
+        function imprimir() {
+            var conteudo = document.getElementById('imprimir').innerHTML;
+            var janelaImprimir = window.open('', '', 'width=800,height=600');
+            janelaImprimir.document.write('<html><head><title>Imprimir</title></head><body>' + conteudo + '</body></html>');
+            janelaImprimir.document.close();
+            janelaImprimir.print();
+        }
+</script>
+
 {% endblock %}

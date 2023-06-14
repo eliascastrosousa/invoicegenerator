@@ -11,7 +11,7 @@
         <h2>Empresas Cadastradas</h2> 
         <hr>
         <br>
-        <table class="table">
+        <table class="table" >
             <thead>
               <tr>
                 <th scope="col">CNPJ</th>
@@ -27,8 +27,8 @@
                 <th scope="row">{{company.cnpj}}</th>
                 <td>{{company.nome}}</td>
                 <td>{{company.logradouro}}</td>
-                <td>{{company.cidade}}</td>
-                <td><a href="{% url 'invoiceregister' company.id %}"> <input type="button" value="Gerar Nota fiscal" class="btn btn-outline-info"> </a></td>
+                <td>{{company.cnpj}}</td>
+                <td><a href="{% url 'invoiceregister' company.id %}"> <input type="button" value="Gerar Nota fiscal" class="btn btn-primary"> </a></td>
               </tr>
               {% empty %}
               <tr>
@@ -39,7 +39,7 @@
             
           </table>
 
-          <a href="{% url 'companyregister' %}"> <input type="button" value="Cadastrar Empresa" class="btn btn-outline-success m-1"> </a>
+          <a href="{% url 'companyregister' %}"> <input type="button" value="Cadastrar Empresa" class="btn btn-success m-1"> </a>
           
     </div>
     {% endblock %}

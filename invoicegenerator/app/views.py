@@ -3,7 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_django
 from django.contrib.auth.decorators import login_required
-from .models import Company
+from .models import Company, Endereco, Contador
+from datetime import datetime, timedelta
+from django.utils import timezone
+
+
 
 @login_required(login_url="/auth/login/")
 def home(request):
@@ -55,11 +59,26 @@ def company_save(request):
          
     return redirect(companylist)
 
-
+def calcular_datas():
+    data_atual = timezone.now().date()
+    data_emissao = data_atual
+    data_vencimento = data_emissao + timedelta(days=7)
+    return data_emissao, data_vencimento
 
 @login_required(login_url="/auth/login/")
 def invoiceregister(request, id):
+    nota_fiscal = Contador.gerar_nota_fiscal()
+    nota_fiscal = str(nota_fiscal).zfill(4)
+    data_emissao, data_vencimento = calcular_datas()
+
     company = Company.objects.get(id=id)
-    return render(request, 'invoiceregister.html', {"company":company})
+    dadoscomplementares = Endereco.objects.all()
+    return render(request, 'invoiceregister.html', 
+                  {"nota_fiscal":nota_fiscal,
+                    "company":company, 
+                    "dadoscomplementares":dadoscomplementares, 
+                    "data_emissao":data_emissao,
+                    "data_vencimento":data_vencimento
+                    })
 
 
