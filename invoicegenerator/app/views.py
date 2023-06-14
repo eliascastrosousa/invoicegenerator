@@ -15,8 +15,9 @@ def home(request):
 
 @login_required(login_url="/auth/login/")
 def companylist(request):
+    endereco = Endereco.objects.filter(username = request.user.username)
     company = Company.objects.filter(username = request.user.username)
-    return render(request, 'companylist.html',{'company': company})
+    return render(request, 'companylist.html',{'company': company, "endereco":endereco})
 
 @login_required(login_url="/auth/login/")
 def companyregister(request):
