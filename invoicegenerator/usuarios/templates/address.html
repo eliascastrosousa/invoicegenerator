@@ -7,18 +7,30 @@
 
 {% block 'body' %}    
     <div class="container mt-5">
-        <h2>Meus Dados</h2> 
-        <hr>
-        <br>
         {% for item in address %}
-            <p>Rua: {{ item.logradouro}} Numero {{ item.numero}}, Complemento: {{ item.complemento}}</p>
-            <p>Bairro: {{ item.bairro}}, {{ item.cidade}}-{{ item.estado}}</p>
-            <a href="{% url 'addressregister' %}"> <input type="button" value="Editar Dados" class="btn btn-secondary m-1"> </a>
+            <h2>Meus Dados</h2> 
+            <hr>
+            <br>
+            <p>Nome Completo: {{ request.user.first_name}} {{ request.user.last_name}}</p>
+            <p>Username: {{ request.user.username}} </p>
+            <p>Email: {{ request.user.email}}</p>
+            <p>Usuario criado dia {{request.user.date_joined}}</p>
+            <p> Meu CNPJ: {{ item.cnpj}} </p>
+            <p>swiftcode:  {{ item.swiftcode}} </p>
+            <p> ibancode: {{ item.ibancode}} </p>  
+            <p>salario: {{ item.salario}}</p>
+            <h5 class="mb-2">Endereço</h5>
+
+                <p>Rua: {{ item.logradouro}} Numero {{ item.numero}}, {{ item.complemento}}</p>
+                <p>Bairro: {{ item.bairro}}, {{ item.cidade}}-{{ item.estado}}</p>
+                
+                    <br>
+                <a href="{% url 'addressregister' %}"> <input type="button" value="Editar Dados" class="btn btn-secondary mt-1"> </a>
 
 
             {% empty %}
-            <p>Nenhum endereço Cadastrado. </p>
-            <a href="{% url 'addressregister' %}"> <input type="button" value="Cadastrar Dados" class="btn btn-secondary m-1"> </a>
+                <p>Nenhum endereço Cadastrado. </p>
+                <a href="{% url 'addressregister' %}"> <input type="button" value="Cadastrar Dados" class="btn btn-secondary m-1"> </a>
         {% endfor %}
     </div>
     {% endblock %}

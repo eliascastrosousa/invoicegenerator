@@ -57,3 +57,9 @@ def company_save(request):
 
 
 
+@login_required(login_url="/auth/login/")
+def invoiceregister(request, id):
+    company = Company.objects.get(id=id)
+    return render(request, 'invoiceregister.html', {"company":company})
+
+

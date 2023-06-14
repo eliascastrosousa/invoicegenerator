@@ -21,14 +21,14 @@
                 <th scope="col">Criar Nota Fiscal</th>
               </tr>
             </thead>
-            {% for item in company %}
+            {% for company in company %}
             <tbody>
               <tr>
-                <th scope="row">{{item.cnpj}}</th>
-                <td>{{item.nome}}</td>
-                <td>{{item.logradouro}}</td>
-                <td>{{item.cidade}}</td>
-                <td><a href="{% url 'companyregister' %}"> <input type="button" value="Criar Invoice" class="btn btn-outline-info"> </a></td>
+                <th scope="row">{{company.cnpj}}</th>
+                <td>{{company.nome}}</td>
+                <td>{{company.logradouro}}</td>
+                <td>{{company.cidade}}</td>
+                <td><a href="{% url 'invoiceregister' company.id %}"> <input type="button" value="Gerar Nota fiscal" class="btn btn-outline-info"> </a></td>
               </tr>
               {% empty %}
               <tr>
