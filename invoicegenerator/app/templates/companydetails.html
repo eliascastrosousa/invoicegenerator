@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} Invoice Generator {% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}
+
+<div class="container mt-5">
+    
+
+    <h2>Detalhes da Companhia</h2>
+    <hr>
+
+    <br>
+    <div class="container">
+        {% for item in company %}
+        Nome: {{item.nome}}
+        <br>
+        CNPJ: {{item.cnpj}}
+        <br>
+        {% if item.email %}
+        Email: {{item.email}}
+        <br>
+        {% endif %}
+        {% if item.telefone %}
+        telefone: {{item.telefone}}
+        <br>
+        {% endif %}
+        <br>
+        <h5>Endereço</h5>
+        {% if item.cep %}
+        CEP: {{item.cep}}
+        <br>
+        {% endif %}
+        {% if item.logradouro %}
+        Rua: {{item.logradouro}}, {{item.numero}}
+        <br>
+        Bairro: {{item.bairro}}, {{item.cidade}} - {{item.estado}} {{item.pais}}
+        {% endif %}
+        <br>
+
+
+        {% endfor %}
+        <br>
+        <a href="#"><input type="button" class="btn btn-primary" value="Editar Dados"></a>
+        <a href="{% url 'companylist' %}"><input type="button" class="btn btn-secondary" value="Voltar"></a>
+        <a href="{% url 'companylist' %}"><input type="button" class="btn btn-danger" value="Deletar Companhia"></a>
+    </div>
+</div>
+{% endblock %}

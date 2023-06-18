@@ -1,6 +1,6 @@
 from django.db import models
 
-class Endereco(models.Model):
+class AdditionalData(models.Model):
     username = models.CharField(max_length=100)
     cnpj = models.CharField(max_length=100)
     swiftcode = models.CharField(max_length=100)

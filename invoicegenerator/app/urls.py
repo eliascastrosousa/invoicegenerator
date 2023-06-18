@@ -7,7 +7,14 @@ urlpatterns = [
     path('companylist', companylist, name='companylist'),
     path('companyregister', companyregister, name='companyregister'),
     path('company_save', company_save, name='company_save'),
-    path('invoiceregister/<int:id>', invoiceregister, name='invoiceregister')
+    path('companydetails/<int:id>', companydetails, name='companydetails'),
+    path('invoicecreate/<int:id>', invoicecreate, name='invoicecreate'),
+    path('invoice_save/', invoice_save, name='invoice_save'),
+    path('invoicelist/', invoicelist, name='invoicelist'),
+    path('invoicedetails/<int:id>', invoicedetails, name='invoicedetails'),
+    path('invoicesearch', invoicesearch, name='invoicesearch')
+
+
     
     
 ]

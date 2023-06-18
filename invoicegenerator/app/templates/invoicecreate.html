@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} Invoice Register {% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block 'body' %}
+<div class="container mt-5">
+    <div class="container">
+        <form class="row g-3 needs-validation p-4" action="{% url 'invoice_save' %}" method="POST">
+            {% csrf_token %}
+            {% for dadoscomplementares in dadoscomplementares %}
+
+            <h4>Dados Emissor</h4>
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Nome: </label>
+                <input type="text" class="form-control" name="nome_emissor" value="{{user.first_name}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Sobrenome: </label>
+                <input type="text" class="form-control" name="sobrenome_emissor" value="{{user.last_name}}">
+            </div>
+
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Email: </label>
+                <input type="email" class="form-control" name="email_emissor" value="{{user.email}}">
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">CNPJ: </label>
+                <input type="text" class="form-control" name="cnpj_emissor" value="{{dadoscomplementares.cnpj}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Swift Code: </label>
+                <input type="text" class="form-control" name="swiftcode" value="{{dadoscomplementares.swiftcode}}">
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">IBAN CODE: </label>
+                <input type="text" class="form-control" name="ibancode" value="{{dadoscomplementares.ibancode}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Salário </label>
+                <input type="number" class="form-control" name="salario" value="{{dadoscomplementares.salario}}">
+            </div>
+
+            <h5>Endereço</h5> 
+            
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">CEP: </label>
+                <input type="text" class="form-control" name="cep_emissor" id="cep" value="{{dadoscomplementares.cep}}">
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Rua: </label>
+                <input type="text" class="form-control" id="rua" name="logradouro_emissor" value="{{dadoscomplementares.logradouro}}">
+            </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Numero: </label>
+                <input type="text" class="form-control" name="num_emissor" value="{{dadoscomplementares.numero}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Complemento: </label>
+                <input type="text" class="form-control" name="complemento_emissor" value="{{dadoscomplementares.complemento}}">
+            </div>
+
+
+            <div class="col-md-2">
+                <label for="validationCustom03" class="form-label">
+                    Bairro: </label>
+                <input type="text" class="form-control" id="bairro" name="bairro_emissor" value="{{dadoscomplementares.bairro}}">
+
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom03" class="form-label">Cidade: </label>
+                <input type="text" class="form-control" id="cidade" name="cidade_emissor" value="{{dadoscomplementares.cidade}}">
+
+            </div>
+            <div class="col-md-2">
+                <label for="validationCustom04" class="form-label">Estado: </label>
+                <input type="text" class="form-control" id="uf" name="estado_emissor" value="{{dadoscomplementares.estado}}">
+            </div>
+            <br>
+            <h4>Dados Destinatario</h4>
+
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Razão Social: </label>
+                <input type="text" class="form-control" name="nome_destinatario" value="{{company.nome}}">
+            </div>
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">CNPJ: (VAT Number)</label>
+                <input type="text" class="form-control" name="cnpj_destinatario" value="{{company.cnpj}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Rua:</label>
+                <input type="text" class="form-control" name="logradouro_destinatario" value="{{company.logradouro}}">
+            </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Bairro:</label>
+                <input type="text" class="form-control" name="bairro_destinatario" value="{{company.bairro}}">
+            </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom05" class="form-label">Cidade:</label>
+                <input type="text" class="form-control" name="cidade_destinatario" value="{{company.cidade}}">
+            </div>
+            
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Data Emissão: <em>(obrigatório)</em></label>
+                <input type="date" class="form-control" name="issuedate" value="{{company.cidade}}" required>
+            </div>
+            
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Data Vencimento: <em>(obrigatório)</em></label>
+                <input type="date" class="form-control" name="duedate" required>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Gerar NF</button>
+                <a href="{% url 'companylist' %}"><input type="button" class="btn btn-secondary" value="Voltar"></a>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+
+</div>
+{% endblock %}
