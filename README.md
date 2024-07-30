@@ -1,5 +1,19 @@
 # Gerador de Notas Fiscais
 Projeto realizado para Criar e gerenciar notas fiscais para empresas estrangeiras. 
+O usuario se cadastra e tem acesso a uma area de trabalho bem que pode cadastrar empresas parceiras que ele tem negocios, e entao administrar notas fiscais de serviço para estas empresas. 
+Com o sistema, o usuario ganha performance e rapidez por conseguir com algumas informaçẽos emitir nota de serviço com o valor e horas trabalhadas.
+
+## Tecnologias
+- Python 3
+- Django 4.2.2
+- Banco de Dados SQLite
+- Bootstrap
+
+## Arquitetura
+Para o projeto foi escolhida a utilização da arquitetura MVT monolitica com a renderização do Front-end vindo pelo Back-end. 
+Para a autenticação esta sendo usada a Stateful permitindo manter o controle do estado de interação da aplicação e permitindo que os dados possam ser mantido em diferentes requisições.
+O banco de dados escolhido foi SQLite por ser pequeno e rapido e rodando como parte do aplicativo.
+
 
 ## Recursos
 
